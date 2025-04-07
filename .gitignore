@@ -39,7 +39,7 @@ env/
 *.sqlite3
 
 # Vector store
-faiss_furniture_index/
+# faiss_furniture_index/
 
 # Logs
 *.log
