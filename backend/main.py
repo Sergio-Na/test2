@@ -122,9 +122,7 @@ def chat_endpoint():
     data = request.get_json()
     user_input = data.get("message", "").strip()
     chat_id = data.get("chatId", "default")
-    response_data = {"response": "hello", "metadata": "hello"}
 
-    return jsonify(response_data)
     if not user_input:
         return jsonify({"error": "No message provided."}), 400
 
