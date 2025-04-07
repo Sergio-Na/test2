@@ -24,8 +24,15 @@ load_dotenv()
 
 app = Flask(__name__)
 
-CORS(app, origins=["https://test2-sigma-seven.vercel.app"], supports_credentials=True)
-
+CORS(
+    app,
+    resources={r"/api/*": {  # Only apply to routes starting with /api/
+        "origins": "https://test2-sigma-seven.vercel.app",  # Your Vercel domain
+        "methods": ["GET", "POST", "OPTIONS", "DELETE", "PUT"],
+        "allow_headers": ["Content-Type", "Authorization"]
+    }},
+    supports_credentials=True
+)
 
 embeddings = HuggingFaceEmbeddings(model_name="sentence-transformers/all-mpnet-base-v2")
 vectorstore = FAISS.load_local(
@@ -95,17 +102,6 @@ def sanitize_metadata(metadata):
     elif isinstance(metadata, (float, int)) and np.isnan(metadata):
         return None
     return metadata
-
-
-@app.after_request
-def add_cors_headers(response):
-    response.headers.add(
-        "Access-Control-Allow-Origin", "https://test2-sigma-seven.vercel.app"
-    )
-    response.headers.add("Access-Control-Allow-Headers", "Content-Type,Authorization")
-    response.headers.add("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE,OPTIONS")
-    response.headers.add("Access-Control-Allow-Credentials", "true")
-    return response
 
 
 @app.route("/api/chat", methods=["OPTIONS"])
