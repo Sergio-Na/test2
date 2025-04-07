@@ -24,15 +24,7 @@ load_dotenv()
 
 app = Flask(__name__)
 
-CORS(
-    app,
-    resources={r"/api/*": {  # Only apply to routes starting with /api/
-        "origins": "https://deco-chat-2wiue0ly7-ilanaestefania-gmailcoms-projects.vercel.app/",  # Your Vercel domain
-        "methods": ["GET", "POST", "OPTIONS", "DELETE", "PUT"],
-        "allow_headers": ["Content-Type", "Authorization"]
-    }},
-    supports_credentials=True
-)
+CORS(app)
 
 embeddings = HuggingFaceEmbeddings(model_name="sentence-transformers/all-mpnet-base-v2")
 vectorstore = FAISS.load_local(
