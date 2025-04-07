@@ -1,8 +1,14 @@
 import React, { useState, useRef, useEffect } from 'react';
 import styled from 'styled-components';
 
-const API_URL = process.env.REACT_APP_BACKEND_URL || 'http://localhost:8000';
-
+// Use this CORS bypass solution
+const useCorsProxy = (url: string) => {
+    return `https://corsproxy.io/?${encodeURIComponent(url)}`;
+  };
+  
+  const API_URL = window.location.hostname === 'localhost'
+    ? 'http://localhost:8000'
+    : '';  // Empty when in production
 // Declare global types for the Web Speech API
 declare global {
   interface Window {
