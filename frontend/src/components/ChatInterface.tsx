@@ -375,7 +375,7 @@ const ChatInterface: React.FC = () => {
         setIsLoading(true);
 
         try {
-            const response = await fetch(`https://corsproxy.io/?${encodeURIComponent('https://test2-pa1d.onrender.com/api/chat')}`, {
+            const response = await fetch(`/api/chat`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
