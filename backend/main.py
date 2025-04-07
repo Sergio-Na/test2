@@ -27,7 +27,7 @@ app = Flask(__name__)
 CORS(
     app,
     resources={r"/api/*": {  # Only apply to routes starting with /api/
-        "origins": "https://test2-sigma-seven.vercel.app",  # Your Vercel domain
+        "origins": "https://deco-chat-2wiue0ly7-ilanaestefania-gmailcoms-projects.vercel.app/",  # Your Vercel domain
         "methods": ["GET", "POST", "OPTIONS", "DELETE", "PUT"],
         "allow_headers": ["Content-Type", "Authorization"]
     }},
