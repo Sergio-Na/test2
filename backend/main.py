@@ -104,6 +104,9 @@ def sanitize_metadata(metadata):
     return metadata
 
 
+@app.route("/api/chat", methods=["OPTIONS"])
+def options():
+    return "", 200
 
 
 @app.route("/api/chat", methods=["DELETE"])
@@ -184,10 +187,8 @@ def chat_endpoint():
         print(f"\nAssistant: {response.content}")
 
         response_data = {"response": response.content, "metadata": metadata_results}
-        response_data = jsonify(response_data)
-        response_data.headers.add('Access-Control-Allow-Origin', '*')
 
-        return response_data
+        return jsonify(response_data)
     except Exception as e:
         print(f"Error: {e}")
         return jsonify({"error": str(e)}), 500
