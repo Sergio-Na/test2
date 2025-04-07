@@ -380,7 +380,6 @@ const ChatInterface: React.FC = () => {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                mode: 'no-cors',
                 body: JSON.stringify({
                     message: input.trim(),
                     chatId: activeChatId
